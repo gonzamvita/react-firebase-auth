@@ -31,24 +31,3 @@ class Firebase {
         this.auth.currentUser.updatePassword(password);
 }
 export default Firebase;
-
-//   < !--The core Firebase JS SDK is always required and must be listed first-- >
-//     <script src="https://www.gstatic.com/firebasejs/7.12.0/firebase-app.js"></script>
-
-//     <!--TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries -->
-
-// <script>
-//   // Your web app's Firebase configuration
-//     var firebaseConfig = {
-//         apiKey: "AIzaSyC2lPKVFSNtBYH6hcWvoI-sook1x4xlMWw",
-//     authDomain: "astute-strategy-272015.firebaseapp.com",
-//     databaseURL: "https://astute-strategy-272015.firebaseio.com",
-//     projectId: "astute-strategy-272015",
-//     storageBucket: "astute-strategy-272015.appspot.com",
-//     messagingSenderId: "61676321889",
-//     appId: "1:61676321889:web:d22f9e491641e98c683e20"
-//   };
-//   // Initialize Firebase
-//   firebase.initializeApp(firebaseConfig);
-// </script>
