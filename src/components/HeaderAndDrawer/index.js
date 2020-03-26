@@ -15,7 +15,6 @@ import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
 import HomeIcon from '@material-ui/icons/Home';
 import AccountBoxIcon from '@material-ui/icons/AccountBox';
 import SettingsIcon from '@material-ui/icons/Settings';
@@ -24,6 +23,8 @@ import { AuthUserContext } from '../Session';
 import SignOutButton from '../SignOut';
 import { Link } from 'react-router-dom';
 import * as ROUTES from '../../constants/routes';
+import { useTranslation } from 'react-i18next';
+import TranslateIcon from '@material-ui/icons/Translate';
 
 const drawerWidth = 240;
 
@@ -52,7 +53,7 @@ const useStyles = makeStyles(theme => ({
     display: 'none',
   },
   drawer: {
-    width: drawerWidth,
+    width: 'auto',
     flexShrink: 0,
   },
   drawerPaper: {
@@ -86,9 +87,11 @@ const useStyles = makeStyles(theme => ({
 
 
 const HeaderAndDrawer = () => {
+  const { t, i18n } = useTranslation(['translation',]);
   const classes = useStyles();
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
+
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -96,6 +99,14 @@ const HeaderAndDrawer = () => {
 
   const handleDrawerClose = () => {
     setOpen(false);
+  };
+
+  const changeLanguage = () => {
+    if (i18n.language !== 'es') {
+      i18n.changeLanguage('es');
+    } else {
+      i18n.changeLanguage('en');
+    }    
   };
 
   const Profile = () => (
@@ -139,6 +150,12 @@ const HeaderAndDrawer = () => {
         </ListItemIcon>
         <ListItemText primary="Admin"/>
       </ListItem>
+      <ListItem button onClick={() => { changeLanguage(); handleDrawerClose();}}>
+        <ListItemIcon>
+          <TranslateIcon />
+        </ListItemIcon>
+        <ListItemText primary="Translate"/>
+      </ListItem>
     </List>
   );
 
@@ -173,7 +190,7 @@ const HeaderAndDrawer = () => {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" className={classes.title}>
-            Aplicación
+            {t('app_title')}
           </Typography>
           <AuthUserContext.Consumer>
             {authUser =>
