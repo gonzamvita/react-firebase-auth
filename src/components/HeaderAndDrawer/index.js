@@ -84,8 +84,9 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
+
 const HeaderAndDrawer = () => {
-    const classes = useStyles();
+  const classes = useStyles();
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
 
@@ -97,6 +98,66 @@ const HeaderAndDrawer = () => {
     setOpen(false);
   };
 
+  const Profile = () => (
+    <div>
+      <IconButton
+        aria-label="account of current user"
+        aria-controls="menu-appbar"
+        aria-haspopup="true"
+        color="inherit"
+      >
+        <AccountCircle />
+      </IconButton>
+      <SignOutButton />
+    </div>
+  );
+
+
+  const ListAuth = () => (
+    <List>
+      <ListItem button component={Link} to={ROUTES.LANDING} onClick={handleDrawerClose}>
+        <ListItemIcon>
+          <HomeIcon />
+        </ListItemIcon>
+        <ListItemText primary="Landing"/>
+      </ListItem>
+      <ListItem button component={Link} to={ROUTES.HOME} onClick={handleDrawerClose}>
+        <ListItemIcon>
+          <HomeIcon />
+        </ListItemIcon>
+        <ListItemText primary="Home"/>
+      </ListItem>
+      <ListItem button component={Link} to={ROUTES.ACCOUNT} onClick={handleDrawerClose}>
+        <ListItemIcon>
+          <AccountBoxIcon />
+        </ListItemIcon>
+        <ListItemText primary="Account"/>
+      </ListItem>
+      <ListItem button component={Link} to={ROUTES.ADMIN} onClick={handleDrawerClose}>
+        <ListItemIcon>
+          <SettingsIcon />
+        </ListItemIcon>
+        <ListItemText primary="Admin"/>
+      </ListItem>
+    </List>
+  );
+
+  const ListNonAuth = () => (
+    <List>
+    <ListItem button component={Link} to={ROUTES.LANDING} onClick={handleDrawerClose}>
+      <ListItemIcon>
+        <HomeIcon />
+      </ListItemIcon>
+      <ListItemText primary="Landing"/>
+    </ListItem>
+    <ListItem button component={Link} to={ROUTES.SIGN_IN} onClick={handleDrawerClose}>
+      <ListItemIcon>
+        <HomeIcon />
+      </ListItemIcon>
+      <ListItemText primary="Sign In"/>
+    </ListItem>
+  </List>
+  );
   return (
     <div className={classes.root}>
       <CssBaseline />
@@ -138,7 +199,8 @@ const HeaderAndDrawer = () => {
         <Divider />
         <AuthUserContext.Consumer>
             {authUser =>
-              authUser ? <ListAuth /> : <ListNonAuth />
+              authUser ? <ListAuth handleDrawerClose={handleDrawerClose}/> : <ListNonAuth 
+              handleDrawerClose={handleDrawerClose}/>
             }
         </AuthUserContext.Consumer>
       </Drawer>
@@ -146,65 +208,6 @@ const HeaderAndDrawer = () => {
   );
 }
 
-const Profile = () => (
-    <div>
-      <IconButton
-        aria-label="account of current user"
-        aria-controls="menu-appbar"
-        aria-haspopup="true"
-        color="inherit"
-      >
-        <AccountCircle />
-      </IconButton>
-      <SignOutButton />
-    </div>
-  );
 
-
-const ListAuth = () => (
-  <List>
-    <ListItem button component={Link} to={ROUTES.LANDING}>
-      <ListItemIcon>
-        <HomeIcon />
-      </ListItemIcon>
-      <ListItemText primary="Landing"/>
-    </ListItem>
-    <ListItem button component={Link} to={ROUTES.HOME}>
-      <ListItemIcon>
-        <HomeIcon />
-      </ListItemIcon>
-      <ListItemText primary="Home"/>
-    </ListItem>
-    <ListItem button component={Link} to={ROUTES.ACCOUNT}>
-      <ListItemIcon>
-        <AccountBoxIcon />
-      </ListItemIcon>
-      <ListItemText primary="Account"/>
-    </ListItem>
-    <ListItem button component={Link} to={ROUTES.ADMIN}>
-      <ListItemIcon>
-        <SettingsIcon />
-      </ListItemIcon>
-      <ListItemText primary="Admin"/>
-    </ListItem>
-  </List>
-);
-
-const ListNonAuth = () => (
-  <List>
-  <ListItem button component={Link} to={ROUTES.LANDING}>
-    <ListItemIcon>
-      <HomeIcon />
-    </ListItemIcon>
-    <ListItemText primary="Landing"/>
-  </ListItem>
-  <ListItem button component={Link} to={ROUTES.SIGN_IN}>
-    <ListItemIcon>
-      <HomeIcon />
-    </ListItemIcon>
-    <ListItemText primary="Sign In"/>
-  </ListItem>
-</List>
-);
 
 export default HeaderAndDrawer;
