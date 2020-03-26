@@ -22,7 +22,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const Header = () => {
-  const classes = useStyles(); 
+  const classes = useStyles();
 
   return (
     <div className={classes.root}>
@@ -35,11 +35,10 @@ const Header = () => {
             Aplicación
           </Typography>
           <AuthUserContext.Consumer>
-      {authUser =>
-        authUser ? <Profile /> : <span/>
-      }
-    </AuthUserContext.Consumer>
-
+            {authUser =>
+              authUser ? <Profile /> : <span />
+            }
+          </AuthUserContext.Consumer>
         </Toolbar>
       </AppBar>
     </div>
@@ -47,17 +46,17 @@ const Header = () => {
 }
 
 const Profile = () => (
-    <div>
-        <IconButton
-        aria-label="account of current user"
-        aria-controls="menu-appbar"
-        aria-haspopup="true"
-        color="inherit"
-        >
-        <AccountCircle />
-        </IconButton>
-        <SignOutButton />
-    </div>
-  );
+  <div>
+    <IconButton
+      aria-label="account of current user"
+      aria-controls="menu-appbar"
+      aria-haspopup="true"
+      color="inherit"
+    >
+      <AccountCircle />
+    </IconButton>
+    <SignOutButton />
+  </div>
+);
 
-  export default Header;
+export default Header;
