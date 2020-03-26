@@ -1,8 +1,7 @@
 import React from 'react';
 import { withFirebase } from '../Firebase';
+import ExitToAppRoundedIcon from '@material-ui/icons/ExitToAppRounded';
 const SignOutButton = ({ firebase }) => (
-  <button type="button" onClick={firebase.doSignOut}>
-    Sign Out
-  </button>
+  <ExitToAppRoundedIcon onClick={firebase.doSignOut} />
 );
 export default withFirebase(SignOutButton);
