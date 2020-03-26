@@ -1,30 +1,22 @@
 import React from 'react';
 import clsx from 'clsx';
+import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
+
 import { makeStyles, useTheme } from '@material-ui/core/styles';
-import Drawer from '@material-ui/core/Drawer';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import List from '@material-ui/core/List';
-import Typography from '@material-ui/core/Typography';
-import Divider from '@material-ui/core/Divider';
-import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from '@material-ui/icons/Menu';
-import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-import ChevronRightIcon from '@material-ui/icons/ChevronRight';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
-import HomeIcon from '@material-ui/icons/Home';
-import AccountBoxIcon from '@material-ui/icons/AccountBox';
-import SettingsIcon from '@material-ui/icons/Settings';
-import AccountCircle from '@material-ui/icons/AccountCircle';
+import { 
+  Drawer, CssBaseline, AppBar, Toolbar, List, Typography, Divider,
+  IconButton, ListItem, ListItemIcon, ListItemText
+} from '@material-ui/core';
+import {
+  Menu as MenuIcon, ChevronLeft as ChevronLeftIcon, ChevronRight as ChevronRightIcon,
+  Home as HomeIcon, AccountBox as AccountBoxIcon, Settings as SettingsIcon,
+  AccountCircle, Translate as TranslateIcon
+} from '@material-ui/icons';
+
 import { AuthUserContext } from '../Session';
 import SignOutButton from '../SignOut';
-import { Link } from 'react-router-dom';
 import * as ROUTES from '../../constants/routes';
-import { useTranslation } from 'react-i18next';
-import TranslateIcon from '@material-ui/icons/Translate';
 
 const drawerWidth = 240;
 
@@ -106,7 +98,7 @@ const HeaderAndDrawer = () => {
       i18n.changeLanguage('es');
     } else {
       i18n.changeLanguage('en');
-    }    
+    }
   };
 
   const Profile = () => (
@@ -130,57 +122,57 @@ const HeaderAndDrawer = () => {
         <ListItemIcon>
           <HomeIcon />
         </ListItemIcon>
-        <ListItemText primary="Landing"/>
+        <ListItemText primary="Landing" />
       </ListItem>
       <ListItem button component={Link} to={ROUTES.HOME} onClick={handleDrawerClose}>
         <ListItemIcon>
           <HomeIcon />
         </ListItemIcon>
-        <ListItemText primary="Home"/>
+        <ListItemText primary="Home" />
       </ListItem>
       <ListItem button component={Link} to={ROUTES.ACCOUNT} onClick={handleDrawerClose}>
         <ListItemIcon>
           <AccountBoxIcon />
         </ListItemIcon>
-        <ListItemText primary="Account"/>
+        <ListItemText primary="Account" />
       </ListItem>
       <ListItem button component={Link} to={ROUTES.ADMIN} onClick={handleDrawerClose}>
         <ListItemIcon>
           <SettingsIcon />
         </ListItemIcon>
-        <ListItemText primary="Admin"/>
+        <ListItemText primary="Admin" />
       </ListItem>
-      <ListItem button onClick={() => { changeLanguage(); handleDrawerClose();}}>
+      <ListItem button onClick={() => { changeLanguage(); handleDrawerClose(); }}>
         <ListItemIcon>
           <TranslateIcon />
         </ListItemIcon>
-        <ListItemText primary="Translate"/>
+        <ListItemText primary="Translate" />
       </ListItem>
     </List>
   );
 
   const ListNonAuth = () => (
     <List>
-    <ListItem button component={Link} to={ROUTES.LANDING} onClick={handleDrawerClose}>
-      <ListItemIcon>
-        <HomeIcon />
-      </ListItemIcon>
-      <ListItemText primary="Landing"/>
-    </ListItem>
-    <ListItem button component={Link} to={ROUTES.SIGN_IN} onClick={handleDrawerClose}>
-      <ListItemIcon>
-        <HomeIcon />
-      </ListItemIcon>
-      <ListItemText primary="Sign In"/>
-    </ListItem>
-  </List>
+      <ListItem button component={Link} to={ROUTES.LANDING} onClick={handleDrawerClose}>
+        <ListItemIcon>
+          <HomeIcon />
+        </ListItemIcon>
+        <ListItemText primary="Landing" />
+      </ListItem>
+      <ListItem button component={Link} to={ROUTES.SIGN_IN} onClick={handleDrawerClose}>
+        <ListItemIcon>
+          <HomeIcon />
+        </ListItemIcon>
+        <ListItemText primary="Sign In" />
+      </ListItem>
+    </List>
   );
   return (
     <div className={classes.root}>
       <CssBaseline />
       <AppBar position="static">
         <Toolbar>
-        <IconButton
+          <IconButton
             color="inherit"
             aria-label="open drawer"
             onClick={handleDrawerOpen}
@@ -215,10 +207,10 @@ const HeaderAndDrawer = () => {
         </div>
         <Divider />
         <AuthUserContext.Consumer>
-            {authUser =>
-              authUser ? <ListAuth handleDrawerClose={handleDrawerClose}/> : <ListNonAuth 
-              handleDrawerClose={handleDrawerClose}/>
-            }
+          {authUser =>
+            authUser ? <ListAuth handleDrawerClose={handleDrawerClose} /> : <ListNonAuth
+              handleDrawerClose={handleDrawerClose} />
+          }
         </AuthUserContext.Consumer>
       </Drawer>
     </div>
