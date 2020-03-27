@@ -11,22 +11,14 @@ class AdminPage extends Component {
   }
   componentDidMount() {
     this.setState({ loading: true });
-
-    this.props.firebase.users().on('value', snapshot => {
-      const usersObject = snapshot.val();
-      const usersList = Object.keys(usersObject).map(key => ({
-        ...usersObject[key],
-        uid: key,
-      }));
+    
+    this.props.firebase.getUsers().then(querySnapshot => {
+      const usersList = querySnapshot.docs.map(doc => doc.data())
       this.setState({
         users: usersList,
         loading: false,
       });
     });
-  }
-
-  componentWillUnmount() {
-    this.props.firebase.users().off();
   }
 
   render() {
@@ -48,13 +40,15 @@ const UserList = ({ users }) => (
     {users.map(user => (
       <li key={user.uid}>
         <span>
-          <strong>ID:</strong> {user.uid}
+          <strong>Username:</strong> {user.username}
         </span>
+        <br />
         <span>
           <strong>E-Mail:</strong> {user.email}
         </span>
+        <br />
         <span>
-          <strong>Username:</strong> {user.username}
+          <strong>UID:</strong> {user.uid}
         </span>
       </li>
     ))}
