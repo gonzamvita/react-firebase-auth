@@ -23,6 +23,10 @@ const drawerWidth = 240;
 const useStyles = makeStyles(theme => ({
   root: {
     display: 'flex',
+    flexGrow: 1
+  },
+  title: {
+    flexGrow: 1
   },
   appBar: {
     transition: theme.transitions.create(['margin', 'width'], {
@@ -102,16 +106,21 @@ const HeaderAndDrawer = () => {
   };
 
   const Profile = () => (
-    <div>
+    <div style={{position:'left'}}>
       <IconButton
-        aria-label="account of current user"
         aria-controls="menu-appbar"
         aria-haspopup="true"
         color="inherit"
       >
         <AccountCircle />
+      </IconButton>      
+      <IconButton
+        aria-controls="menu-appbar"
+        aria-haspopup="true"
+        color="inherit"
+      >
+        <SignOutButton />
       </IconButton>
-      <SignOutButton />
     </div>
   );
 
