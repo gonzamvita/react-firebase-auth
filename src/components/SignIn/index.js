@@ -70,6 +70,7 @@ class SignInFormBase extends Component {
           variant="contained" onClick={ e=> this.onSubmit(e)}>
           Sign In
         </Button>
+        {error && <p>{error.message}</p>}
       </div>  
     );
   }
