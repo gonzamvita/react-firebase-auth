@@ -5,6 +5,7 @@ import { SignUpLink } from '../SignUp';
 import { withFirebase } from '../Firebase';
 import { PasswordForgetLink } from '../PasswordForget';
 import * as ROUTES from '../../constants/routes';
+import { TextField, Button} from '@material-ui/core';
 
 const SignInPage = () => (
   <div>
@@ -38,32 +39,38 @@ class SignInFormBase extends Component {
     event.preventDefault();
   };
   onChange = event => {
-    this.setState({ [event.target.name]: event.target.value });
+    this.setState({ [event.target.id]: event.target.value });
   };
   render() {
     const { email, password, error } = this.state;
-    const isInvalid = password === '' || email === '';
+    const isInvalid = (password === '' || email === '');
+
     return (
-      <form onSubmit={this.onSubmit}>
-        <input
-          name="email"
-          value={email}
+      <div>
+        <TextField
+          required
+          id="email"
+          label="Email Address"
+          variant="filled"
+          value={this.state.email}
           onChange={this.onChange}
-          type="text"
-          placeholder="Email Address"
         />
-        <input
-          name="password"
-          value={password}
-          onChange={this.onChange}
+        <TextField
+          required
+          id="password"
+          label="Password"
           type="password"
-          placeholder="Password"
+          autoComplete={this.state.password}
+          variant="outlined"
+          value={this.state.password}
+          onChange={this.onChange}
         />
-        <button disabled={isInvalid} type="submit">
+
+        <Button type="submit" disabled={isInvalid} 
+          variant="contained" onClick={ e=> this.onSubmit(e)}>
           Sign In
-        </button>
-        {error && <p>{error.message}</p>}
-      </form>
+        </Button>
+      </div>  
     );
   }
 }
