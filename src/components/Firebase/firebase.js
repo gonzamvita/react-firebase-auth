@@ -12,7 +12,6 @@ const config = {
     messagingSenderId: process.env.REACT_APP_MESSAGING_SENDER_ID,
     appId: process.env.REACT_APP_APP_ID,
     publicVapidKey: process.env.REACT_APP_PUBLIC_VAPID_KEY,
-    
 };
 
 class Firebase {
@@ -35,7 +34,7 @@ class Firebase {
 
     doPasswordReset = email => this.auth.sendPasswordResetEmail(email);
 
-    doPasswordUpdate = password =>
+    doPasswordUpdate = password => 
         this.auth.currentUser.updatePassword(password);
 
     // USER API
