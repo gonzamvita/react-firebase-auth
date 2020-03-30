@@ -1,6 +1,7 @@
 import app from 'firebase/app';
 import 'firebase/auth';
 import 'firebase/firestore';
+import 'firebase/messaging';
 
 const config = {
     apiKey: process.env.REACT_APP_API_KEY,
@@ -8,7 +9,10 @@ const config = {
     databaseURL: process.env.REACT_APP_DATABASE_URL,
     projectId: process.env.REACT_APP_PROJECT_ID,
     storageBucket: process.env.REACT_APP_STORAGE_BUCKET,
-    messagingSenderId: process.env.REACT_APP_MESSAGING_SENDER_ID
+    messagingSenderId: process.env.REACT_APP_MESSAGING_SENDER_ID,
+    appId: process.env.REACT_APP_APP_ID,
+    publicVapidKey: process.env.REACT_APP_PUBLIC_VAPID_KEY,
+    
 };
 
 class Firebase {
@@ -17,6 +21,7 @@ class Firebase {
 
         this.auth = app.auth();
         this.db = app.firestore();
+        this.msg = app.messaging().usePublicVapidKey(config.publicVapidKey);
     }
 
     // AUTH API
